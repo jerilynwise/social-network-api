@@ -16,7 +16,7 @@ const thoughtController = {
     getThoughtById({ params }, res) {
       Thought.findOne({ _id: params.thoughtId })
       .populate({
-          path: 'reactions',
+          path: 'reaction',
           select: '-__v'
       })
       .select('-__v')
@@ -45,7 +45,7 @@ const thoughtController = {
       .then(dbUserData => {
         console.log(dbUserData);
         if (!dbUserData) {
-          res.status(404).json({ message: 'Thought created but no user with this id' });
+          res.status(404).json({ message: 'Thought created' });
           return;
         }
         res.json({message: 'Thought created'});
